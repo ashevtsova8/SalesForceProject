@@ -1,24 +1,20 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
+    public static final SelenideElement usernameInput = $x("//*[@id='username']");
+    public static final SelenideElement passwordInput = $x("//*[@id='password']");
+    public static final SelenideElement loginButton = $x("//*[@id='Login']");
+
+    public LoginPage() {
     }
 
-    @FindBy(xpath = "//*[@id='username']")
-    public WebElement usernameInput;
-    @FindBy(xpath = "//*[@id='password']")
-    public WebElement passwordInput;
-    @FindBy(xpath = "//*[@id='Login']")
-    public WebElement loginButton;
-
     public LoginPage openPage(String url) {
-        driver.get(url);
+        open(url);
         return this;
     }
 

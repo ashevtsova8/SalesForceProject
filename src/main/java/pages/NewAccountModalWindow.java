@@ -1,39 +1,33 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import elements.Button;
 import elements.DropDown;
 import elements.Input;
 import objects.Account;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
 public class NewAccountModalWindow extends BasePage {
+    public static final SelenideElement saveButton = $x("//*[@name='SaveEdit']");
+    public static final SelenideElement saveAndNewButton = $x("//*[@name='SaveAndNew']");
+    public static final SelenideElement cancelButton = $x("//*[@name='CancelEdit']");
 
-    @FindBy(xpath = "//*[@name='SaveEdit']")
-    public WebElement saveButton;
-
-    @FindBy(xpath = "//*[@name='SaveAndNew']")
-    public WebElement saveAndNewButton;
-
-    @FindBy(xpath = "//*[@name='CancelEdit']")
-    public WebElement cancelButton;
-
-    public NewAccountModalWindow(WebDriver driver) {
-        super(driver);
+    public NewAccountModalWindow() {
     }
 
     public  NewAccountModalWindow openPage(String url) {
-        driver.get(url);
+        open(url);
         return this;
     }
 
-    public void createAccountWithExit(Account account) throws InterruptedException {
-        new Input(driver, "Account Name").writeTextInInput(account.getAccountName());
-        new Input(driver, "Website").writeTextInInput(account.getWebsite());
-        new DropDown(driver, "Type").accountSelectOption(account.getType());
-        new Input(driver, "Description").writeTextInTextarea(account.getDescription());
-        new Input(driver, "Phone").writeTextInInput(account.getPhone());
-        new Button(driver).clickButton(saveButton);
+    public void createAccountWithExit(Account account) {
+        new Input("Account Name").writeTextInInput(account.getAccountName());
+        new Input("Website").writeTextInInput(account.getWebsite());
+        new DropDown("Type").accountSelectOption(account.getType());
+        new Input("Description").writeTextInTextarea(account.getDescription());
+        new Input("Phone").writeTextInInput(account.getPhone());
+        new Button().clickButton(saveButton);
     }
 }

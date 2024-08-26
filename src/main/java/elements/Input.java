@@ -1,10 +1,10 @@
 package elements;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class Input {
-    WebDriver driver;
     String label;
 
     private static final String INPUT_XPATH =
@@ -12,16 +12,15 @@ public class Input {
     private static final String TEXTAREA_XPATH =
       "//*[contains(text(),'%s')]/ancestor::*[contains(@slot,'inputField')]//textarea";
 
-    public Input(WebDriver driver, String label) {
-        this.driver = driver;
+    public Input(String label) {
         this.label = label;
     }
 
     public void writeTextInInput(String text) {
-        driver.findElement(By.xpath(String.format(INPUT_XPATH, label))).sendKeys(text);
+        $(By.xpath(String.format(INPUT_XPATH, label))).sendKeys(text);
     }
 
     public void writeTextInTextarea(String text) {
-        driver.findElement(By.xpath(String.format(TEXTAREA_XPATH, label))).sendKeys(text);
+        $(By.xpath(String.format(TEXTAREA_XPATH, label))).sendKeys(text);
     }
 }

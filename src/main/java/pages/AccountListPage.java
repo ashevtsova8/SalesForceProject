@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class AccountListPage extends BasePage {
     public static final String ACCOUNT_NAME_FIELD_XPATH = "//*[contains(@title,'%s')]";
@@ -10,29 +12,29 @@ public class AccountListPage extends BasePage {
     public static final String ACCOUNT_OWNER_BY_ACCOUNT_NAME_FIELD_XPATH =
             "//*[contains(@title,'%s')]/ancestor::tr//span[contains(@class,'uiOutputText')]";
 
-    public AccountListPage(WebDriver driver) {
-        super(driver);
+    public AccountListPage() {
+
     }
 
     public AccountListPage openPage(String url) {
-        driver.get(url);
+        open(url);
         return this;
     }
 
     public String getExistAccountName(String accountName) {
-        return driver.findElement(By.xpath(String.format(ACCOUNT_NAME_FIELD_XPATH, accountName))).getText();
+        return $(By.xpath(String.format(ACCOUNT_NAME_FIELD_XPATH, accountName))).getText();
     }
 
     public String getExistPhoneByAccountName(String accountName) {
-        return driver.findElement(By.xpath(String.format(PHONE_BY_ACCOUNT_NAME_FIELD_XPATH, accountName))).getText();
+        return $(By.xpath(String.format(PHONE_BY_ACCOUNT_NAME_FIELD_XPATH, accountName))).getText();
     }
 
     public String getExistAccountOwnerByAccountName(String accountName) {
-        return driver.findElement(By.xpath(String.format(ACCOUNT_OWNER_BY_ACCOUNT_NAME_FIELD_XPATH, accountName))).getText();
+        return $(By.xpath(String.format(ACCOUNT_OWNER_BY_ACCOUNT_NAME_FIELD_XPATH, accountName))).getText();
     }
 
     public AccountPage clickOnAccountName(String accountName) {
-        driver.findElement(By.xpath(String.format(ACCOUNT_NAME_FIELD_XPATH, accountName))).click();
-        return new AccountPage(driver);
+        $(By.xpath(String.format(ACCOUNT_NAME_FIELD_XPATH, accountName))).click();
+        return new AccountPage();
     }
 }

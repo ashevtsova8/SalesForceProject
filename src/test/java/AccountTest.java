@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class AccountTest extends BaseTest {
     @Test
-    public void checkAccountExistInAccountsListTest() throws InterruptedException {
+    public void checkAccountExistInAccountsListTest() {
         Account account1 = new Account();
         account1
                 .setAccountName("account" + numberGenerator.generateRandomInt(50))
@@ -35,7 +35,7 @@ public class AccountTest extends BaseTest {
   }
 
     @Test
-    public void checkAccountDataOnAccountPageTest() throws InterruptedException {
+    public void checkAccountDataOnAccountPageTest() {
         Account account2 = new Account();
         account2
                 .setAccountName("account" + numberGenerator.generateRandomInt(50))
